@@ -25,6 +25,6 @@ public class Main {
 		
 		input1 = total/60;
 		input2 = total%60;
-		System.out.println(input1 + " " + input2);
+		System.out.println(input1 + " " + input2); 
 	}
 }
