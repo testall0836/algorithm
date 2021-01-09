@@ -9,10 +9,9 @@ public class Main {
 
 		int operNum = 1;
 		int initNum = 1;
-		int[] selfNum = new int[10001];
-		boolean chk = true;
+		int[] selfNum = new int[10040];
 
-		while (chk) {
+		while (true) {
 
 			int totalNum = operNum;
 
@@ -28,21 +27,17 @@ public class Main {
 			totalNum = totalNum + operNum;
 			operNum = totalNum + operNum;
 
-			if (operNum > 10000) {
-
-				if (initNum > 10000) {
-					break;
-				}
-
+			if (initNum > 10000) {
+				break;
+			} else {
 				initNum = initNum + 1;
 				operNum = initNum;
-			} else {
 				selfNum[totalNum] = 1;
 			}
 
 		}
 
-		for (int i = 1; i < selfNum.length; i++) {
+		for (int i = 1; i < 10000; i++) {
 			if (selfNum[i] == 0) {
 				bw.write(i + "\n");
 			}
