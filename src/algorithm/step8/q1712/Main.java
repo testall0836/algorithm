@@ -19,16 +19,12 @@ public class Main {
 			int price = Integer.parseInt(st.nextToken());
 			int laptopPrice = Integer.parseInt(st.nextToken());
 
-			int total = 0;
-			int i = 0;
-			while (true) {
-				if ((staticPrice) < (laptopPrice-price) * i) {
-					break;
-				}
-				i++;
+			if (price >= laptopPrice) {
+				bw.write("-1");
+			} else {
+				bw.write(String.valueOf(staticPrice / (laptopPrice - price) + 1));
 			}
-			bw.write(String.valueOf(i));
-			
+
 			bw.flush();
 			bw.close();
 			br.close();
