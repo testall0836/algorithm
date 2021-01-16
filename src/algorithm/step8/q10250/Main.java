@@ -23,7 +23,7 @@ public class Main {
 				int roomNumber = 0;
 
 				if (N % H == 0) {
-					roomNumber = 100 + (N / H);
+					roomNumber = H * 100 + (N / H);
 				} else {
 					roomNumber = N % H * 100 + ((N / H) + 1);
 				}
