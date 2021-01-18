@@ -8,7 +8,8 @@ import java.io.OutputStreamWriter;
 /**
  * 설탕 배달
  * 
- * 시간 제한, 메모리 제한 - 1 초, 128 MB 소요 시간, 소요 메모리
+ * 시간 제한, 메모리 제한 - 1 초, 128 MB 
+ * 소요 시간, 소요 메모리 - 11568 KB, 80 ms
  * 
  * @author testall0836
  * @date 2021. 1. 17
