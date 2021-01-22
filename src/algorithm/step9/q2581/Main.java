@@ -26,15 +26,42 @@ public class Main {
 		int N = Integer.parseInt(br.readLine());
 		int decimalSum = 0;
 		int minDecimal = 0;
-		
+
 		for (int i = M; i <= N; i++) {
-			
-			int vs = 3;
-			while (true) {
-				if (i == 1 || i == 2) {
-					continue;
+			int vs = 2;
+			int check = 0;
+
+			if (i == 1) { // 소수 아님
+				continue;
+			} else {
+				while (true) {
+
+					if (i == vs && check == 0) { // 2 이상의 숫자에서 나눠졌다?
+						decimalSum += i;
+						if (minDecimal == 0) { // 자연수 아닌 0과 비교하여 최초 가장 작은 소수 저장
+							minDecimal = i;
+						}
+						break;
+					} else if (i != vs && check > 0) {
+						break;
+					}
+
+					if (i % vs == 0) {
+						check++;
+					}
+					vs++;
 				}
 			}
 		}
+
+		if (minDecimal == 0) {
+			bw.write(String.valueOf(-1));
+		} else {
+			bw.write(String.valueOf(decimalSum) + "\n" + String.valueOf(minDecimal));
+		}
+
+		bw.flush();
+		bw.close();
+		br.close();
 	}
 }
