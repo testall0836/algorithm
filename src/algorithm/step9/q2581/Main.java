@@ -8,12 +8,14 @@ import java.io.OutputStreamWriter;
 /**
  * 소수
  * 
- * 시간 제한 - 1 초 메모리 제한 - 128 MB
+ * 시간 제한 - 1 초 
+ * 메모리 제한 - 128 MB
  * 
- * 소요 시간 - 76 ms 소요 메모리 - 11580 KB
+ * 소요 시간 - 128 ms 
+ * 소요 메모리 - 12056 KB
  * 
  * @author testall0836
- * @date 2021. 1. 21
+ * @date 2021. 1. 23
  *
  */
 public class Main {
