@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 /**
  * Fly me to the Alpha Centauri	 
@@ -11,11 +12,11 @@ import java.io.OutputStreamWriter;
  * 시간 제한	- 2 초 
  * 메모리 제한	- 512 MB
  * 
- * 소요 시간	- ms 
+ * 소요 시간	- ms (시간초과 실패)
  * 소요 메모리	- KB 
  * 
  * @author	testall0836
- * @date	2021. 1. 29
+ * @date	2021. 2. 2
  *
  */
 public class Main {
@@ -25,50 +26,35 @@ public class Main {
 		
 		int inputCnt = Integer.parseInt(br.readLine());
 		
-		for (int z = 0; z < inputCnt; z++) {
-			String[] input = br.readLine().split(" ");
-			// 최소gap 은 1
-			int gap = Integer.parseInt(input[1]) - Integer.parseInt(input[0]);
+		for (int i = 0; i < inputCnt; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int left = Integer.parseInt(st.nextToken());
+			int right = Integer.parseInt(st.nextToken());
+			int gap = right - left - 2; // 지점 간의 거리 - 시작과 끝의 이동(1) 미리 차감
 			
-			if (gap == 1) {
-				bw.write("1" + "\n");
-				continue;
-			} else if (gap == 2) {
-				bw.write("2" + "\n");
-				continue;
-			} else if (gap == 3 || gap == 4) {
-				bw.write("3" + "\n");
-				continue;
-			}
-			
-			int i = 2;
-			int num = 2;
-			int min = 2;
+			int minMovement = 2;	// 거리가 최소 3이라는 가정하에 처음과 마지막 이동횟수 미리 카운트
+			int vsGap = 0;
 			boolean ch = false;
-
-			while (true) {
+			
+			for (int j = 2; ; j++) {
 				
-				for (int j = 1; j < i; j++) {
-					num += i;
-					min++;
-					if (gap == num) {
-						bw.write(String.valueOf(min+1));
-						ch = true;
-						break;
-					} else if (gap < num) {
-						bw.write(String.valueOf(min));
+				if (ch == true) {
+					break;
+				}
+				
+				for (int z = 0; z < 2; z++) { // 각 j 인덱스의 2회 반복
+										
+					vsGap = vsGap + j;
+					minMovement++;	//이동 횟수 증가
+					
+					if (vsGap >= gap && vsGap - gap < j) {
+						bw.write(String.valueOf(minMovement) + "\n");
 						ch = true;
 						break;
 					}
 				}
-				if (ch == true) {
-					break;
-				}
-				i++;
 			}
-			bw.write("\n");
 		}
-		
 		bw.flush();
 		bw.close();
 		br.close();
