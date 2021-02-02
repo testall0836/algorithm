@@ -12,8 +12,8 @@ import java.util.StringTokenizer;
  * 시간 제한	- 2 초 
  * 메모리 제한	- 512 MB
  * 
- * 소요 시간	- ms (시간초과 실패)
- * 소요 메모리	- KB 
+ * 소요 시간	- 84 ms
+ * 소요 메모리	- 12068 KB 
  * 
  * @author	testall0836
  * @date	2021. 2. 2
@@ -30,33 +30,13 @@ public class Main {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			int left = Integer.parseInt(st.nextToken());
 			int right = Integer.parseInt(st.nextToken());
-			int gap = right - left - 2; // 지점 간의 거리 - 시작과 끝의 이동(1) 미리 차감
-			
-			int minMovement = 2;	// 거리가 최소 3이라는 가정하에 처음과 마지막 이동횟수 미리 카운트
-			int vsGap = 0;
-			boolean ch = false;
-			
-			for (int j = 2; ; j++) {
-				
-				if (ch == true) {
-					break;
-				}
-				
-				for (int z = 0; z < 2; z++) { // 각 j 인덱스의 2회 반복
-										
-					vsGap = vsGap + j;
-					minMovement++;	//이동 횟수 증가
-					
-					if (vsGap >= gap && vsGap - gap < j) {
-						bw.write(String.valueOf(minMovement) + "\n");
-						ch = true;
-						break;
-					}
-				}
-			}
+			int gap = right - left; // 지점 간의 거리 - 시작과 끝의 이동(1) 미리 차감
+		
+			bw.write(String.format("%d", (int)Math.ceil(Math.sqrt(gap)*2-1)) + "\n");
 		}
 		bw.flush();
 		bw.close();
 		br.close();
+		
 	}
 }
