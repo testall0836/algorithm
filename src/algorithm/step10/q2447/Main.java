@@ -12,7 +12,7 @@ import java.util.Scanner;
  * 소요 메모리	-  KB
  * 
  * @author	testall0836
- * @date	2021. 2. 2
+ * @date	2021. 2. 5
  *
  */
 public class Main {
