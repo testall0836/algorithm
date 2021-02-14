@@ -8,7 +8,10 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * 단어 정렬
@@ -16,11 +19,11 @@ import java.util.List;
  * 시간 제한	- 2 초 
  * 메모리 제한	- 256 MB
  * 
- * 소요 시간	- ms 
- * 소요 메모리	- KB
+ * 소요 시간	- 340 ms 
+ * 소요 메모리	- 33716 KB
  * 
  * @author	testall0836
- * @date	2021. 2. 13
+ * @date	2021. 2. 14
  *
  */
 public class Main {
@@ -29,36 +32,30 @@ public class Main {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		int inputCnt = Integer.parseInt(br.readLine());
-		List<char[]> inputList = new ArrayList<char[]>();
+		Map<String, Integer> inputMap = new HashMap<String, Integer>();
 		
 		for (int i = 0; i < inputCnt; i++) {
-			char[] in = br.readLine().toCharArray();
-			inputList.add(in);
+			String input = br.readLine();
+			inputMap.put(input, input.toCharArray().length);
 		}
 		
-		Collections.sort(inputList, new Comparator<char[]>() {
+		List<Entry<String, Integer>> list = new ArrayList<>(inputMap.entrySet());
+		Collections.sort(list, new Comparator<Entry<String, Integer>>() {
 			@Override
-			public int compare(char[] o1, char[] o2) {
+			public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
 				
-				if (o1.length > o2.length) {
+				if (o1.getValue() > o2.getValue()) {
 					return 1;
-				} else if (o1.length == o2.length) {
-					//문제 잘못 파악,
-					//동일 단어는 1회 출력
-					for (int i = 0; i < o1.length; i++) {
-						if (o1[i] > o2[i]) {
-							return 1;
-						}
-					}
+				} else if (o1.getValue() == o2.getValue()) {
+					return o1.getKey().compareTo(o2.getKey());
 				}
-				
 				
 				return -1;
 			}
 		});
-		
-		for (char[] str : inputList) {
-			bw.write(String.valueOf(str) + "\n");
+
+		for (int i = 0; i < list.size(); i++) {
+			bw.write(list.get(i).getKey() + "\n");
 		}
 		
 		bw.flush();
