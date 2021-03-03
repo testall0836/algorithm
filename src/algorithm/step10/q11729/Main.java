@@ -17,6 +17,8 @@ import java.io.OutputStreamWriter;
  * 
  * @author	testall0836
  * @date	2021. 2. 17
+ * 
+ * 입력 : 첫째 줄에 첫 번째 장대에 쌓인 원판의 개수 N (1 ≤ N ≤ 20)
  *
  */
 public class Main {
