@@ -17,28 +17,30 @@ import java.io.OutputStreamWriter;
  *
  */
 public class Main {
-	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int input = Integer.parseInt(br.readLine());
-		int i = 2;
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        String firstInput = br.readLine();  // 행렬의 크기 N M 입력
+        Integer[] matrixSize = Stream.of(firstInput.split(" ")).map(Integer::valueOf).toArray(Integer[]::new);
+        
+        Integer[][] matrixSum = new Integer[matrixSize[0]][matrixSize[1]];
 
-		while (true) {
-			if (input % i == 0) {
-				input = input / i;
-				bw.write(String.valueOf(i) + "\n");
-			} else {
-				i++;
-			}
+        //입력을 먼저 완료 처리해야 됨, 실패한 로직
+        for ( int i = 0; i < matrixSize[0]; i++ ) {
+            String InputMatrix = br.readLine(); //행렬의 행을 순서대로 입력받음
+            Integer[] matrixNum = Stream.of(InputMatrix.split(" ")).map(Integer::valueOf).toArray(Integer[]::new);
+            for ( int j = 0; j < matrixSize[1]; j++ ) {
+                matrixSum[i][j] += matrixNum[j];
+            }
+        }
 
-			if (input == 1) {
-				break;
-			}
-		}
 
-		bw.flush();
-		bw.close();
-		br.close();
-	}
+        
+     
+        bw.flush();
+        bw.close();
+
+        br.close();
+    }	
 }
