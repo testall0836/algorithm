@@ -35,20 +35,22 @@ public class Main {
             String line = br.readLine();
 
             for ( int j = 0; j < m; j++ ) {
-                matrixSum[i%3][j] += Integer.parseInt(line.split(" ")[j]);
+                matrixSum[i%n][j] += Integer.parseInt(line.split(" ")[j]);
             }
         }
      
-        for ( int i = 0; i < n; i ++ ) {
-            for ( int j = 0; j < m; j ++ ) {
-                bw.write(String.valueOf(matrixSum[i][j]) + " ");
+        int i = 0, j = 0;
+        while ( i != matrixSum.length ) {
+            while ( j != matrixSum[i].length ) {
+                bw.write(matrixSum[i][j] + " ");
+                j++;
             }
-            bw.write("\n ");
+            j = 0;
+            i++;
+            bw.write("\n");
         }
      
-        bw.flush();
         bw.close();
-
         br.close();
     }	
 }
