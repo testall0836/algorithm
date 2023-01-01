@@ -12,9 +12,11 @@ import java.util.Arrays;
  * 시간 제한 : 1초
  * 메모리 제한 : 128 MB
  * 
+ * 메모리 : 11528 KB
+ * 시간 :   88 ms
  * 
  * @author testall0836
- * @date 2022. 12. 29
+ * @date 2023. 1. 2
  *
  */
 public class Main {
@@ -22,50 +24,38 @@ public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
+        //가로 101, 세로 101 정사각형
+        boolean[][] squares = new boolean[101][101];
+
         //색종이 갯수 입력
-        int paperCnt = Integer.parseInt(br.readLine());
-        
-        //중복영역이 계산되지 않은 색종이 넓이
-        int paperArea = paperCnt * (10 * 10);
+        int confettiCnt = Integer.parseInt(br.readLine());
 
-        //누적중복넓이
-        int sumDupArea = 0;
-
-        //중복넓이를 제외한 색종이 넓이
-        int calPaperArea = 0;
-
-        //사각형 좌표 저장을 위한 2차원 배열 선언
-        int[][] squares = new int[paperCnt][2];
+        //전체 면적
+        int totalArea = 0;
         
         //각 색종이 좌측하단 좌표값 저장
-        for ( int i = 0; i < paperCnt; i++ ) {
+        for ( int i = 0; i < confettiCnt; i++ ) {
 
             String[] inputSquare = br.readLine().split(" ");
-            for ( int j = 0; j < 2; j++ ) {
-                squares[i][j] = Integer.parseInt(inputSquare[j]);
+            int xPosition = Integer.parseInt(inputSquare[0]);
+            int yPosition = Integer.parseInt(inputSquare[1]);
+
+            for ( int x = xPosition; x < xPosition+10; x++ ) {
+                for ( int y = yPosition; y < yPosition+10; y++) {
+                    squares[y][x] = true;
+                }
             }
         }
 
-        //배열 순차 방문, 해당 인덱스의 값을 자기 자신을 제외한 이후의 인덱스와 비교
-        //
-        for ( int x = 0; x < paperCnt; x++ ) {
-            //두 인덱스의 좌표값(x, y)을 비교하여   (|x1 - x2| < 10) && (|y1 - y2| < 10) 인 경우 두 사각형은 중복영역이 존재
-            //(10 - (|x1 - x2|)) * (10 - (|y1 - y2|)) 가 중복영역의 넓이
-            for ( int y = x+1; y < paperCnt; y++ ) {
-
-                int widthDiff = Math.abs(squares[x][0] - squares[y][0]);
-                int heightDiff = Math.abs(squares[x][1] - squares[y][1]);
-
-                if ( ( widthDiff < 10 ) && ( heightDiff < 10 ) ) {
-                    sumDupArea += (10 - widthDiff) * (10 - heightDiff);
-                } 
+        for ( int i = 0; i < 100; i++ ) {
+            for ( int j = 0 ; j < 100; j++ ) {
+                if (squares[i][j] == true) {
+                    totalArea += 1;
+                }
             }
         }
-        calPaperArea = paperArea - sumDupArea;
-
-        //색종이 전체 영역 - 색종이 중복 영역
-        System.out.println(calPaperArea);
-
+        
         br.close();
+        System.out.println(totalArea);
     }	
 }
