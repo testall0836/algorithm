@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.stream.Stream;
 
 /**
  * 출처 : https://www.acmicpc.net/problem/25305
@@ -29,8 +30,16 @@ public class Main {
         int total = Integer.parseInt(firstInput[0]);
         int cutLine = Integer.parseInt(firstInput[1]);
 
+        String[] scoreList = br.readLine().split(" ");
+        int[] scores = new int[scoreList.length];
+        for (int i = 0; i < scoreList.length; i++) {
+            scores[i] = Integer.parseInt(scoreList[i]);
+        }
+
         System.out.println(total);
         System.out.println(cutLine);
+
+        Arrays.stream(scores).forEach(System.out::print);
      
         bw.flush();
         bw.close();
