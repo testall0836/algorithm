@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.stream.Stream;
 
 /**
@@ -17,7 +18,7 @@ import java.util.stream.Stream;
  * 
  * 
  * @author testall0836
- * @date 2023. 1. 4
+ * @date 2023. 1. 7
  *
  */
 public class Main {
@@ -28,18 +29,17 @@ public class Main {
         
         String[] firstInput = br.readLine().split(" ");
         int total = Integer.parseInt(firstInput[0]);
-        int cutLine = Integer.parseInt(firstInput[1]);
+        int cutLine = Integer.parseInt(firstInput[1]) - 1;
 
         String[] scoreList = br.readLine().split(" ");
-        int[] scores = new int[scoreList.length];
-        for (int i = 0; i < scoreList.length; i++) {
+        int[] scores = new int[total];
+        for (int i = 0; i < total; i++) {
             scores[i] = Integer.parseInt(scoreList[i]);
         }
 
-        System.out.println(total);
-        System.out.println(cutLine);
+        scores = Arrays.stream(scores).boxed().sorted(Collections.reverseOrder()).mapToInt(x -> x).toArray();
 
-        Arrays.stream(scores).forEach(System.out::print);
+        bw.write(String.valueOf(scores[cutLine]));
      
         bw.flush();
         bw.close();
