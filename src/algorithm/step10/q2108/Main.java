@@ -27,8 +27,19 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        String[] firstInput = br.readLine().split(" ");
+        int numCnt = Integer.parseInt(br.readLine());
+        int[] numArr = new int[numCnt];
 
+        for (int i = 0; i < numCnt; i++) {
+            numArr[i] = Integer.parseInt(br.readLine());
+        }
+
+        double avg = Arrays.stream(numArr).average().orElse(numCnt);
+        int max = Arrays.stream(numArr).max().getAsInt();
+        int min = Arrays.stream(numArr).min().getAsInt();
+
+        System.out.println(Math.round(avg));
+        System.out.println(max - min);
      
         bw.flush();
         bw.close();
