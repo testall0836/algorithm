@@ -22,7 +22,7 @@ import java.util.stream.Stream;
  * 
  * 
  * @author testall0836
- * @date 2023. 1. 12
+ * @date 2023. 1. 14
  *
  */
 public class Main {
@@ -48,29 +48,20 @@ public class Main {
         }
 
         double avg = Arrays.stream(numArr).average().getAsDouble();
-        
         int median = Arrays.stream(numArr).sorted().toArray()[numArr.length / 2];
-
         int mode = 0;
 
-        //최빈값이 여러개인 경우 두번째 값을 출력
-        //값을 기준으로 내림차순 정렬 후 2개 이상의 원소를 가진 경우 1,2 번 원소의 값을 비교 후
-        //값이 다른 경우 1번 원소의 키를
-        //값이 같은 경우 2번 원소의 키를 최빈값으로 출력
-
         //최빈값이 여러개인 경우 두번째 작은 수를 출력 (문제 파악 오류,, 최빈값 목록들을 정렬한 뒤 두번째 작은 값을 출력해야 함)
-        Map.Entry<Integer, Integer> firstElm = listforMode.entrySet().stream().max(Map.Entry.comparingByValue()).get();
-        Map.Entry<Integer, Integer> secondElm = listforMode.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).skip(1).findFirst().orElse(null);
+        Map.Entry<Integer, Integer> firstElm = listforMode.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue(Comparator.reverseOrder()).thenComparing(Map.Entry.comparingByKey())).findFirst().get();
+        Map.Entry<Integer, Integer> secondElm = listforMode.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue(Comparator.reverseOrder()).thenComparing(Map.Entry.comparingByKey())).skip(1).findFirst().orElse(null);
 
         if ( secondElm != null ) {
             //두번째 원소가 존재할 경우
             if ( secondElm.getValue() == firstElm.getValue() ) {
                 //1번과 2번 원소의 값이 같은 경우
-                if ( firstElm.getKey() > secondElm.getKey() ) {
-                    mode = secondElm.getKey();
-                } else {
-                    mode = firstElm.getKey();
-                }
+                mode = secondElm.getKey();
+            } else {
+                mode = firstElm.getKey();
             }
         } else {
             //입력값이 하나인 경우는 해당 원소가 최빈값
