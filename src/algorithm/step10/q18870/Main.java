@@ -29,7 +29,10 @@ public class Main {
 
         int numberCnt = Integer.parseInt(br.readLine());
 
-        System.out.println(numberCnt);
+        String[] numbers = br.readLine().split(" ");
+        int[] points = Arrays.stream(numbers).mapToInt(Integer::parseInt).toArray();
+
+        Arrays.stream(points).forEach(System.out::println);
      
         bw.flush();
         bw.close();
