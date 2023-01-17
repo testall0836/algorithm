@@ -8,6 +8,12 @@ import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -30,9 +36,26 @@ public class Main {
         int numberCnt = Integer.parseInt(br.readLine());
 
         String[] numbers = br.readLine().split(" ");
-        int[] points = Arrays.stream(numbers).mapToInt(Integer::parseInt).toArray();
+        int[] pointList = Arrays.stream(numbers).mapToInt(Integer::parseInt).toArray();
+        int[] points = Arrays.stream(numbers).distinct().mapToInt(Integer::parseInt).sorted().toArray();
 
-        Arrays.stream(points).forEach(System.out::println);
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < points.length; i++) {
+            map.put(points[i], i);
+        }
+
+        for (int j = 0; j < pointList.length; j++) {
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                if (entry.getKey() == pointList[j]) {
+                    System.out.print(entry.getValue());
+                }
+            }
+            if (j != pointList.length-1) {
+                System.out.print(" ");
+            }
+        }
+        
      
         bw.flush();
         bw.close();
